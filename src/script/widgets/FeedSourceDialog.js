@@ -148,7 +148,7 @@ gxp.FeedSourceDialog = Ext.extend(Ext.Window, {
                 var ptype = this.sourceTypeRadioList.getValue().inputValue;
                 var config = {
                     "title" : this.titleTextField.getValue(),
-                    "group" : this.georssfeedsText,
+                    "group" : this.georssfeedsText
                 };
 
                 if (ptype != "gx_feedsource") {

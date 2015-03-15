@@ -570,7 +570,7 @@ GeoExt.Lang.add("zh-cn", {
         overlayNodeText: 'CN Overlays',
         baseNodeText: 'Base Layers', 
         addCategoryActionText: 'Add Category',
-        addCategoryActionTipText: 'Add category', 
+        addCategoryActionTipText: 'Add category'
     }
     
 });
