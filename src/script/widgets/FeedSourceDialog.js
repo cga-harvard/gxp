@@ -22,7 +22,18 @@ gxp.FeedSourceDialog = Ext.extend(Ext.Window, {
     titleText: "Feed Title",
 
     keywordText: "Keyword",
-
+    
+    typeText: "Type",
+    
+    urlText: "URL",
+    
+    maxResultsText: "Maximum # Results",
+    
+    chooseNumberText: "Choose number...",
+    
+    georssfeedsText: "GeoRSS Feeds",
+    
+    
     /** config: config[mapPanel]
      *  ``GeoExt.MapPanel``
      *  GeoExplorer object to which layers can be added.
@@ -40,7 +51,7 @@ gxp.FeedSourceDialog = Ext.extend(Ext.Window, {
         this.addEvents("feed-added");
 
         this.sourceTypeRadioList = new Ext.form.RadioGroup({
-            fieldLabel: 'Type',
+            fieldLabel: this.typeText,
             columns: [500],
             labelWidth: 100,
             items: [
@@ -69,7 +80,7 @@ gxp.FeedSourceDialog = Ext.extend(Ext.Window, {
         });
 
         this.urlTextField = new Ext.form.TextField({
-            fieldLabel: "URL",
+            fieldLabel: this.urlText,
             allowBlank: false,
             //hidden: true,
             width: 240,
@@ -93,7 +104,7 @@ gxp.FeedSourceDialog = Ext.extend(Ext.Window, {
         });
 
         this.maxResultsField = new Ext.form.ComboBox({
-            fieldLabel: 'Maximum # Results',
+            fieldLabel: this. maxResultsText,
             hidden: true,
             hiddenName: 'max-results',
             store: new Ext.data.ArrayStore({
@@ -103,7 +114,7 @@ gxp.FeedSourceDialog = Ext.extend(Ext.Window, {
             displayField: 'max-results',
             mode: 'local',
             triggerAction: 'all',
-            emptyText:'Choose number...',
+            emptyText: this.chooseNumberText,
             labelWidth: 100,
             defaults: {
                 labelWidth: 100,
@@ -137,7 +148,7 @@ gxp.FeedSourceDialog = Ext.extend(Ext.Window, {
                 var ptype = this.sourceTypeRadioList.getValue().inputValue;
                 var config = {
                     "title" : this.titleTextField.getValue(),
-                    "group" : "GeoRSS Feeds"
+                    "group" : this.georssfeedsText,
                 };
 
                 if (ptype != "gx_feedsource") {
