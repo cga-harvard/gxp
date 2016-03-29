@@ -29,13 +29,13 @@ gxp.plugins.ArcRestSource = Ext.extend(gxp.plugins.LayerSource, {
      *  Title for no layers message (i18n).
      */
     noLayersTitle: "No ArcGIS Layers",
-    
+
     /** api: config[noLayersText]
      *  ``String``
      *  Content of no layers message (i18n).
      */
     noLayersText: "Could not find any layers with a compatible projection (Web Mercator) at ",
-    
+
     requiredProperties: ["name"],
 
     constructor:function (config) {
@@ -104,7 +104,7 @@ gxp.plugins.ArcRestSource = Ext.extend(gxp.plugins.LayerSource, {
         var processFailure = function (response) {
             if (!response.isTimeout) {
                 Ext.Msg.alert(source.noLayersTitle, source.noLayersText + source.config.url);
-            }   
+            }
             source.fireEvent("failure", source);
         };
 
@@ -187,64 +187,58 @@ gxp.plugins.ArcRestSource = Ext.extend(gxp.plugins.LayerSource, {
             return l.get("name") === config.name;
         };
 
-        var recordExists = this.lazy ||  (this.store && this.store.findBy(cmp) > -1);
-
-        // only return layer if app does not have it already
-        if (this.target.mapPanel.layers.findBy(cmp) == -1 && recordExists) {
-            // records can be in only one store
-
-            if (!this.lazy &&  this.store.findBy(cmp) > -1 ) {
-                record = this.store.getAt(this.store.findBy(cmp)).clone();
-            } else {
-                record = this.createLazyLayerRecord(config);
-            }
-            layer = record.getLayer();
-
-            if ("bbox" in config) {
-                layer.addOptions({"maxExtent": config.bbox});
-            } else {
-                this.setLayerBounds(layer);
-            }
-
-            // set layer title from config
-            if (config.title) {
-                layer.setName(config.title);
-                record.set("title", config.title);
-            }
-            // set visibility from config
-            if ("visibility" in config) {
-                layer.visibility = config.visibility;
-            }
-
-            if ("opacity" in config) {
-                layer.opacity = config.opacity;
-            }
-
-            if ("format" in config) {
-                layer.params.FORMAT = config.format;
-                record.set("format", config.format);
-            }
-
-            var singleTile = false;
-            if ("tiled" in config) {
-                singleTile = !config.tiled;
-            } 
-
-            record.set("name", config.name);
-            record.set("layerid", config.layerid || layer.params.LAYERS);
-            record.set("format", config.format || "png");
-            record.set("tiled", "tiled" in config ? config.tiled : true);
-            record.set("srs", layer.projection.getCode());
-            record.set("selected", config.selected || false);
-            record.set("queryable", config.queryable || true);
-            record.set("source", config.source);
-            record.set("properties", "gxp_arcrestlayerpanel");
-
-            if ("group" in config) {
-                record.set("group", config.group);
-            }
-            record.commit();
+        if (!this.lazy &&  this.store.findBy(cmp) > -1 ) {
+            record = this.store.getAt(this.store.findBy(cmp)).clone();
+        } else {
+            record = this.createLazyLayerRecord(config);
         }
+        layer = record.getLayer();
+
+        if ("bbox" in config) {
+            layer.addOptions({"maxExtent": config.bbox});
+        } else {
+            this.setLayerBounds(layer);
+        }
+
+        // set layer title from config
+        if (config.title) {
+            layer.setName(config.title);
+            record.set("title", config.title);
+        }
+        // set visibility from config
+        if ("visibility" in config) {
+            layer.visibility = config.visibility;
+        }
+
+        if ("opacity" in config) {
+            layer.opacity = config.opacity;
+        }
+
+        if ("format" in config) {
+            layer.params.FORMAT = config.format;
+            record.set("format", config.format);
+        }
+
+        var singleTile = false;
+        if ("tiled" in config) {
+            singleTile = !config.tiled;
+        }
+
+        record.set("name", config.name);
+        record.set("layerid", config.layerid || layer.params.LAYERS);
+        record.set("format", config.format || "png");
+        record.set("tiled", "tiled" in config ? config.tiled : true);
+        record.set("srs", layer.projection.getCode());
+        record.set("selected", config.selected || false);
+        record.set("queryable", config.queryable || true);
+        record.set("source", config.source);
+        record.set("properties", "gxp_arcrestlayerpanel");
+
+        if ("group" in config) {
+            record.set("group", config.group);
+        }
+        record.commit();
+
         return record;
     },
 
@@ -279,17 +273,17 @@ gxp.plugins.ArcRestSource = Ext.extend(gxp.plugins.LayerSource, {
         var processResult = function (response) {
             var json = Ext.decode(response.responseText);
             if ("extent" in json) {
-                layer.addOptions({"maxExtent": [json.extent.xmin, json.extent.ymin, json.extent.xmax, json.extent.ymax]});            
+                layer.addOptions({"maxExtent": [json.extent.xmin, json.extent.ymin, json.extent.xmax, json.extent.ymax]});
             }
         };
 
-        var response = Ext.Ajax.request({         
+        var response = Ext.Ajax.request({
             timeout: 2000,
             params:{'f':'json', 'pretty':'false', 'keepPostParams':'true'},
             method:'POST',
             url: this.url.split("?")[0] + "/" + layer.params.LAYERS.replace("show:",""),
             success: processResult
-        }); 
+        });
         json = Ext.decode(response.responseText);
 
 
