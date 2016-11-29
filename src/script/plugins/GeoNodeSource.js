@@ -102,7 +102,8 @@ gxp.plugins.GeoNodeSource = Ext.extend(gxp.plugins.WMSSource, {
                     config.title,
                     config.url,
                     {
-                        isBaseLayer: false
+                        isBaseLayer: false,
+                        restrictedExtent: maxExtent
                     }
                 );
             }else{
@@ -144,9 +145,9 @@ gxp.plugins.GeoNodeSource = Ext.extend(gxp.plugins.WMSSource, {
                     layer.attributes = config.attributes;
                 }
             };
-            
 
-            
+
+
 
 
             // data for the new record
