@@ -76,9 +76,9 @@ gxp.plugins.LayerShare = Ext.extend(gxp.plugins.Tool, {
         var layerShareAction = actions[0];
 
         this.target.on("layerselectionchange", function(record) {
-           
-            if (!layerShareAction.isDisabled() && record) {
-                this.link = record.get('detail_url');
+
+            if (!layerShareAction.isDisabled() && record && record.get('group') !== 'background') {
+                this.link = record.get('detail_url') || this.linkPrefix + record.getLayer().params.LAYERS;
             }
 
         }, this);

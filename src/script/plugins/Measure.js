@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2008-2011 The Open Planning Project
- * 
+ *
  * Published under the GPL license.
  * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
  * of the license.
@@ -32,7 +32,7 @@ Ext.namespace("gxp.plugins");
  *    Provides two actions for measuring length and area.
  */
 gxp.plugins.Measure = Ext.extend(gxp.plugins.Tool, {
-    
+
     /** api: ptype = gxp_measure */
     ptype: "gxp_measure",
 
@@ -133,7 +133,7 @@ gxp.plugins.Measure = Ext.extend(gxp.plugins.Tool, {
         var cleanup = function() {
             if (measureToolTip) {
                 measureToolTip.destroy();
-            }  
+            }
         };
 
         var makeString = function(metricData) {
@@ -189,7 +189,7 @@ gxp.plugins.Measure = Ext.extend(gxp.plugins.Tool, {
                 scope: this
             }
         });
-        var measureControl = new OpenLayers.Control.Measure(handlerType, 
+        var measureControl = new OpenLayers.Control.Measure(handlerType,
             controlOptions);
 
         return measureControl;
@@ -201,6 +201,7 @@ gxp.plugins.Measure = Ext.extend(gxp.plugins.Tool, {
         this.activeIndex = 0;
         this.button = new Ext.SplitButton({
             iconCls: "gxp-icon-measure-length",
+            text: "Measure",
             tooltip: this.measureTooltip,
             buttonText: this.buttonText,
             enableToggle: true,
@@ -279,7 +280,7 @@ gxp.plugins.Measure = Ext.extend(gxp.plugins.Tool, {
 
         return gxp.plugins.Measure.superclass.addActions.apply(this, [this.button]);
     }
-        
+
 });
 
 Ext.preg(gxp.plugins.Measure.prototype.ptype, gxp.plugins.Measure);
