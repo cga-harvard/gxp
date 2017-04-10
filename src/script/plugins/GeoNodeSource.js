@@ -103,7 +103,9 @@ gxp.plugins.GeoNodeSource = Ext.extend(gxp.plugins.WMSSource, {
                     config.url,
                     {
                         isBaseLayer: false,
-                        restrictedExtent: maxExtent
+                        restrictedExtent: maxExtent,
+                        visibility: ("visibility" in config) ? config.visibility : true,
+                        opacity: ("opacity" in config) ? config.opacity : 1
                     }
                 );
             }else{
