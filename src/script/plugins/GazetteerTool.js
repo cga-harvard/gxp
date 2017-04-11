@@ -54,7 +54,7 @@ gxp.plugins.GazetteerTool = Ext.extend(gxp.plugins.Tool, {
     /** api: config[services]
      *  ``String`` Default gazetteer services to search
      */
-    services: 'worldmap,google',
+    services: 'worldmap,geonames',
 
     /** api: config[searchingText]
      *  ``String`` Text to show when search is taking place
