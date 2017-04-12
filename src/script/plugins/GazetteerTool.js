@@ -70,7 +70,7 @@ gxp.plugins.GazetteerTool = Ext.extend(gxp.plugins.Tool, {
 
         // Text field to enter search term in
         this.searchTB = new Ext.form.TextField({
-            id:'search-tb',
+            id:'search-tbg',
             width:150,
             emptyText:'Place name:',
             handleMouseEvents: true,
